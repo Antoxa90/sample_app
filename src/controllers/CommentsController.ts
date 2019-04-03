@@ -3,10 +3,21 @@ import { Comments } from '../models/Comments';
 import express from 'express';
 import { User } from '../models/User';
 import { RequestValidation } from '../validators/RequestValidation';
+import { CommentValidator } from '../validators/CommentValidator';
+import * as apiRoutes from '../constants/routes';
 
 export class CommentsController {
+  public router: express.Router = express.Router();
+  public commentValidator: CommentValidator = new CommentValidator();
+
   constructor() {
     sequelize.addModels( [Comments, User] );
+    this.initializeRoutes();
+  }
+
+  public initializeRoutes() {
+    this.router.get( apiRoutes.COMMENTS, this.getAllComments );
+    this.router.post( apiRoutes.COMMENTS, this.commentValidator.createComment(), this.createComment );
   }
 
   public getAllComments( req: express.Request, res: express.Response ) {
