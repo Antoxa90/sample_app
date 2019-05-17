@@ -12,6 +12,6 @@ export class User extends Model<User> {
   @Column
   password: string;
 
-  @HasMany( () => Comments )
+  @HasMany( () => Comments, { onUpdate: "CASCADE", onDelete: "CASCADE", hooks: true } )
   comments: Comments[]
 }

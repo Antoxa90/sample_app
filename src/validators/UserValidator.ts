@@ -8,7 +8,7 @@ export class UserValidator extends BaseValidator {
       super.requireValidator( 'login' ),
       super.requireValidator( 'password' ),
       check( 'password' )
-        .isLength( { min: 6 } )
+        .isLength( { min: 8 } )
         .withMessage( 'Password is too short. It should have 8 character or more!' )
         .custom( ( password, { req: { body } } ) => {
           if (password !== body.confirmPassword) {
