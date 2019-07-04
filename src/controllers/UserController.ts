@@ -1,13 +1,13 @@
 import express from 'express';
 import passport from 'passport';
 import { IVerifyOptions } from 'passport-local';
-import bcrypt from 'bcrypt';
 import { sequelize } from '../sequelize';
 import { User } from '../models/User';
 import { Comments } from '../models/Comments';
 import { RequestValidation } from '../validators/RequestValidation';
 import { UserValidator } from '../validators/UserValidator';
 import AuthService from '../services/AuthService';
+import { getPasswordHash } from '../utils/userUtils';
 import * as apiRoutes from '../constants/routes';
 
 export class UserController {
@@ -37,10 +37,9 @@ export class UserController {
     new RequestValidation().validate( req )
       .then( () => {
         const { login, password } = req.body;
-        bcrypt.hash( password, 10, ( err, hash ) =>
+        getPasswordHash( password ).then( hash =>
           User.create( { login, password: hash } )
-            .then( ( { id, login } ) => res.send( { user: { id, login } } ) )
-        );
+        ).then( ( { id, login } ) => res.send( { user: { id, login } } ) );
       } )
       .catch( errors => res.status( 400 ).json( errors ) );
   }

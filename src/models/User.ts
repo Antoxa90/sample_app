@@ -2,7 +2,7 @@ import { Table, Column, Model, HasMany } from 'sequelize-typescript';
 import { Comments } from './Comments';
 
 @Table( {
-  tableName: 'user'
+  tableName: 'User'
 } )
 export class User extends Model<User> {
 

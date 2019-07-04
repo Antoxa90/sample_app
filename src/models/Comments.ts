@@ -2,7 +2,7 @@ import { Table, Column, Model, BelongsTo, ForeignKey } from 'sequelize-typescrip
 import { User } from './User';
 
 @Table( {
-  tableName: 'comments'
+  tableName: 'Comments'
 } )
 export class Comments extends Model<Comments> {
   @ForeignKey( () => User )

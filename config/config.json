@@ -1,0 +1,18 @@
+{
+  "development": {
+    "username": "user",
+    "password": "user",
+    "database": "medicine",
+    "host": "172.17.0.2",
+    "dialect": "mysql",
+    "operatorsAliases": "{ $gt: Sequelize.Op.gt }"
+  },
+  "test": {
+    "username": "user",
+    "password": "user",
+    "database": "medicine_test",
+    "host": "172.17.0.2",
+    "dialect": "mysql",
+    "operatorsAliases": "{ $gt: Sequelize.Op.gt }"
+  }
+}

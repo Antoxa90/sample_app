@@ -10,7 +10,7 @@ chai.use( chaiHttp );
 describe( 'CommentsController', () => {
   beforeEach( ( done ) => {
     // TODO: change to truncate all tables or to truncate by sequelize (via model)
-    sequelize.query( "SET FOREIGN_KEY_CHECKS = 0; TRUNCATE `comments`; SET FOREIGN_KEY_CHECKS = 1;" )
+    sequelize.query( "SET FOREIGN_KEY_CHECKS = 0; TRUNCATE `Comments`; SET FOREIGN_KEY_CHECKS = 1;" )
       .then( () => done() )
   } );
 

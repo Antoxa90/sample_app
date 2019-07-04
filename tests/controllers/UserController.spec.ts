@@ -6,13 +6,14 @@ import * as apiRoutes from '../../src/constants/routes';
 import { sequelize } from '../sequelize';
 import bcrypt from 'bcrypt';
 import { User } from '../../src/models/User';
+import { getPasswordHash } from '../../src/utils/userUtils';
 
 chai.use( chaiHttp );
 
 describe( 'UserController', () => {
   beforeEach( ( done ) => {
     // TODO: change to truncate all tables or to truncate by sequelize (via model)
-    sequelize.query( "SET FOREIGN_KEY_CHECKS = 0; TRUNCATE `user`; SET FOREIGN_KEY_CHECKS = 1;" )
+    sequelize.query( "SET FOREIGN_KEY_CHECKS = 0; TRUNCATE `User`; SET FOREIGN_KEY_CHECKS = 1;" )
       .then( () => done() )
   } );
 
@@ -43,13 +44,11 @@ describe( 'UserController', () => {
     const agent = chai.request.agent( app.app ).keepOpen();
     beforeEach( ( done ) => {
       // Authorize user
-      bcrypt.hash( user.password, 10, ( err, hash ) =>
+      getPasswordHash( user.password ).then( hash =>
         User.create( { login: user.login, password: hash } )
-          .then( () =>
-            agent.post( apiRoutes.LOGIN )
-              .send( { login: user.login, password: user.password } )
-              .then( () => done() )
-          )
+      ).then( () => agent.post( apiRoutes.LOGIN )
+        .send( { login: user.login, password: user.password } )
+        .then( () => done() )
       )
     } );
 
