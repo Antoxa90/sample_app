@@ -1,7 +1,7 @@
-import { check } from 'express-validator/check';
 import { RequestHandlerParams } from 'express-serve-static-core';
-import { BaseValidator } from './BaseValidator';
+import { check } from 'express-validator/check';
 import { User } from '../models/User';
+import { BaseValidator } from './BaseValidator';
 
 export class CommentValidator extends BaseValidator {
   public createComment(): RequestHandlerParams {
@@ -9,7 +9,7 @@ export class CommentValidator extends BaseValidator {
       super.requireValidator( 'userId' ),
       super.requireValidator( 'text' ),
       check( 'userId' )
-        .custom( userId => {
+        .custom( (userId) => {
           return User.findOne( { where: { id: userId } } );
         } )
         .withMessage('No such user!')

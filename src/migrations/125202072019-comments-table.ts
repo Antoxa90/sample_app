@@ -1,27 +1,27 @@
 import { QueryInterface, SequelizeStatic } from 'sequelize';
 
 module.exports = {
+  down: ( queryInterface: QueryInterface, Sequelize: SequelizeStatic ) => queryInterface.dropTable( 'Comments' ),
   up: ( queryInterface: QueryInterface, Sequelize: SequelizeStatic ) =>
     queryInterface.createTable( 'Comments', {
+      creationDate: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
       id: {
-        type: Sequelize.INTEGER,
+        autoIncrement: true,
         primaryKey: true,
-        autoIncrement: true
+        type: Sequelize.INTEGER,
       },
       text: Sequelize.STRING,
-      creationDate: {
-        type: Sequelize.DATE,
-        allowNull: false
-      },
       userId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'User',
-          key: 'id'
-        },
+        onDelete: 'cascade',
         onUpdate: 'cascade',
-        onDelete: 'cascade'
+        references: {
+          key: 'id',
+          model: 'User',
+        },
+        type: Sequelize.INTEGER,
       },
     } ),
-  down: ( queryInterface: QueryInterface, Sequelize: SequelizeStatic ) => queryInterface.dropTable( 'Comments' ),
 };

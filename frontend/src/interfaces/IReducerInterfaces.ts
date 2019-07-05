@@ -4,5 +4,5 @@ export interface IUser {
 }
 
 export interface IStoreState {
-  user: IUser
+  user: IUser;
 }

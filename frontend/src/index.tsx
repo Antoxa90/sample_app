@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
+import { applyMiddleware, createStore } from 'redux';
 import { batchDispatchMiddleware } from 'redux-batched-actions';
+import { composeWithDevTools } from 'redux-devtools-extension/logOnlyInProduction';
 import immutableStateInvariantMiddleware from 'redux-immutable-state-invariant';
-import rootReducer from './reducers';
+import thunk from 'redux-thunk';
 import App from './App';
+import rootReducer from './reducers';
 
 // Variable from webpack define plugin
 declare const DEV_MODE: boolean;

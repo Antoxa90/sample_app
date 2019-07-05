@@ -1,12 +1,35 @@
 {
   "defaultSeverity": "error",
-  "extends": [
-    "tslint:recommended"
-  ],
+  "extends": "tslint:recommended",
+  "linterOptions": {
+    "exclude": "node_modules/**/*.ts"
+  },
   "jsRules": {},
   "rules": {
     "trailing-comma": [
       false
+    ],
+    "arrow-parens": true,
+    "no-duplicate-imports": true,
+    "no-console": [
+      true,
+      "debug",
+      "info",
+      "time",
+      "timeEnd",
+      "trace"
+    ],
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "semicolon": [true, "always"],
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-pascal-case",
+      "allow-leading-underscore"
     ]
   },
   "rulesDirectory": []

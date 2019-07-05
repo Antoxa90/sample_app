@@ -1,18 +1,25 @@
-import passport from 'passport';
-import passportLocal from 'passport-local'
-import express from 'express';
 import bcrypt from 'bcrypt';
+import express from 'express';
+import passport from 'passport';
+import passportLocal from 'passport-local';
 import { User } from '../models/User';
 
 export default class AuthService {
+  public static isAuthenticated = ( req: express.Request, res: express.Response, next: express.NextFunction ) => {
+    if (req.isAuthenticated()) {
+      return next();
+    }
+    return res.status( 401 ).json( { message: 'Unauthorized' } );
+  }
+
   constructor() {
     const LocalStrategy = passportLocal.Strategy;
     passport.use( new LocalStrategy( {
+      passwordField: 'password',
         usernameField: 'login',
-        passwordField: 'password'
       }, ( login, password, done ) => {
         User.findOne( { where: { login } } )
-          .then( user => {
+          .then( (user) => {
             bcrypt.compare( password, user.password, ( err, res ) => {
               if (!res) {
                 return done( null, false, { message: 'Incorrect login or password!' } );
@@ -20,7 +27,7 @@ export default class AuthService {
               done( null, user );
             } );
           } )
-          .catch( error => done( null, false, { message: 'Incorrect login or password!' } ) );
+          .catch( (error) => done( null, false, { message: 'Incorrect login or password!' } ) );
       }
     ) );
 
@@ -37,15 +44,7 @@ export default class AuthService {
   public deserialize() {
     passport.deserializeUser( ( id: number, done ) => {
       User.findByPk( id )
-        .then( user => done( null, user ) )
+        .then( (user) => done( null, user ) );
     } );
   }
-
-  public static isAuthenticated = ( req: express.Request, res: express.Response, next: express.NextFunction ) => {
-    if (req.isAuthenticated()) {
-      return next();
-    }
-    return res.status( 401 ).json( { message: 'Unauthorized' } );
-  };
 }
-

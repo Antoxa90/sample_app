@@ -7,11 +7,11 @@ export class RequestValidation {
     return new Promise( ( resolve, reject ) => {
       if (!errors.isEmpty()) {
         const mappedErrors = errors.array( { onlyFirstError: true } )
-          .map( error => ({
+          .map( (error) => ({
+            // @ts-ignore
+            message: error.msg,
             // @ts-ignore
             propertyPath: error.param,
-            // @ts-ignore
-            message: error.msg
           }) );
         reject( mappedErrors );
       }

@@ -1,4 +1,4 @@
-import { Table, Column, Model, BelongsTo, ForeignKey } from 'sequelize-typescript';
+import { BelongsTo, Column, ForeignKey, Model, Table } from 'sequelize-typescript';
 import { User } from './User';
 
 @Table( {
@@ -7,14 +7,14 @@ import { User } from './User';
 export class Comments extends Model<Comments> {
   @ForeignKey( () => User )
   @Column
-  userId: number;
+  public userId: number;
 
   @BelongsTo( () => User )
-  user: User;
+  public user: User;
 
   @Column
-  text: string;
+  public text: string;
 
   @Column
-  creationDate: Date;
+  public creationDate: Date;
 }

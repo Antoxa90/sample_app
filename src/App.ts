@@ -1,7 +1,7 @@
-import express from 'express';
 import bodyParser from 'body-parser';
-import passport from 'passport';
+import express from 'express';
 import session from 'express-session';
+import passport from 'passport';
 import AuthService from './services/AuthService';
 
 export default class App {
@@ -12,11 +12,18 @@ export default class App {
     this.app = express();
     this.port = port;
 
-    new AuthService();
+    const auth = new AuthService();
 
     this.initializeMiddlewares();
     this.initializeControllers( controllers );
     this.initializeApiLogger();
+  }
+
+  public listen() {
+    this.app.listen( this.port, () => {
+      // tslint:disable-next-line:no-console
+      console.log( `Server started at http://localhost:${this.port}` );
+    } );
   }
 
   private initializeMiddlewares() {
@@ -37,13 +44,6 @@ export default class App {
     this.app.use( ( req: express.Request, res: express.Response, next: express.NextFunction ) => {
       console.log( `${req.method} ${req.path}` );
       next();
-    } );
-  }
-
-  public listen() {
-    this.app.listen( this.port, () => {
-      // tslint:disable-next-line:no-console
-      console.log( `Server started at http://localhost:${this.port}` );
     } );
   }
 }

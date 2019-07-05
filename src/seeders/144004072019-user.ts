@@ -18,6 +18,6 @@ module.exports = {
   },
 
   down: async ( queryInterface: QueryInterface, Sequelize: SequelizeStatic ) => {
-    queryInterface.bulkDelete( 'User', [{ id: 1 }, { id: 2 }] )
+    queryInterface.bulkDelete( 'User', [{ id: 1 }, { id: 2 }] );
   }
 };

@@ -1,8 +1,8 @@
 import dotenv from 'dotenv';
-import './sequelize';
 import App from './App';
-import { UserController } from './controllers/UserController';
 import { CommentsController } from './controllers/CommentsController';
+import { UserController } from './controllers/UserController';
+import './sequelize';
 
 let port: number = 8080;
 if (process.env.NODE_ENV !== 'production') {

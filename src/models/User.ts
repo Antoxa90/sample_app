@@ -1,4 +1,4 @@
-import { Table, Column, Model, HasMany } from 'sequelize-typescript';
+import { Column, HasMany, Model, Table } from 'sequelize-typescript';
 import { Comments } from './Comments';
 
 @Table( {
@@ -7,11 +7,11 @@ import { Comments } from './Comments';
 export class User extends Model<User> {
 
   @Column
-  login: string;
+  public login: string;
 
   @Column
-  password: string;
+  public password: string;
 
-  @HasMany( () => Comments, { onUpdate: "CASCADE", onDelete: "CASCADE", hooks: true } )
-  comments: Comments[]
+  @HasMany( () => Comments, { onUpdate: 'CASCADE', onDelete: 'CASCADE', hooks: true } )
+  public comments: Comments[];
 }

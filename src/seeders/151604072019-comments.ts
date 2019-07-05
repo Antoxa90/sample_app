@@ -4,21 +4,21 @@ module.exports = {
   up: ( queryInterface: QueryInterface, Sequelize: SequelizeStatic ) => {
     return queryInterface.bulkInsert( 'Comments', [
       {
+        creationDate: new Date(),
         id: 1,
-        userId: 2,
         text: 'This is the first comment.',
-        creationDate: new Date()
+        userId: 2,
       },
       {
+        creationDate: new Date(),
         id: 2,
-        userId: 2,
         text: 'One more small comment.',
-        creationDate: new Date()
+        userId: 2,
       }
     ], {} );
   },
 
   down: ( queryInterface: QueryInterface, Sequelize: SequelizeStatic ) => {
-    queryInterface.bulkDelete( 'Comments', [{ id: 1 }, { id: 2 }] )
+    queryInterface.bulkDelete( 'Comments', [{ id: 1 }, { id: 2 }] );
   }
 };

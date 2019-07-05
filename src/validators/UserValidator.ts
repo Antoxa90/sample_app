@@ -1,5 +1,5 @@
-import { check } from 'express-validator/check';
 import { RequestHandlerParams } from 'express-serve-static-core';
+import { check } from 'express-validator/check';
 import { BaseValidator } from './BaseValidator';
 
 export class UserValidator extends BaseValidator {

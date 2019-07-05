@@ -1,10 +1,10 @@
-import { sequelize } from '../sequelize';
-import { Comments } from '../models/Comments';
 import express from 'express';
-import { User } from '../models/User';
-import { RequestValidation } from '../validators/RequestValidation';
-import { CommentValidator } from '../validators/CommentValidator';
 import * as apiRoutes from '../constants/routes';
+import { Comments } from '../models/Comments';
+import { User } from '../models/User';
+import { sequelize } from '../sequelize';
+import { CommentValidator } from '../validators/CommentValidator';
+import { RequestValidation } from '../validators/RequestValidation';
 
 export class CommentsController {
   public router: express.Router = express.Router();
@@ -22,14 +22,14 @@ export class CommentsController {
 
   public getAllComments( req: express.Request, res: express.Response ) {
     Comments.findAll( { include: [User] } )
-      .then( comments => res.send( comments ) );
+      .then( (comments) => res.send( comments ) );
   }
 
   public getUserComments( req: express.Request, res: express.Response ) {
     Comments.findAll( {
       where: { userId: req.params.userId }
     } )
-      .then( comments => res.send( comments ) );
+      .then( (comments) => res.send( comments ) );
   }
 
   public createComment( req: express.Request, res: express.Response ) {
@@ -37,8 +37,8 @@ export class CommentsController {
       .then( () => {
         const { userId, text } = req.body;
         Comments.create( { userId, text } )
-          .then( comment => res.send( comment ) )
+          .then( (comment) => res.send( comment ) );
       } )
-      .catch( errors => res.status( 400 ).json( errors ) );
+      .catch( (errors) => res.status( 400 ).json( errors ) );
   }
 }

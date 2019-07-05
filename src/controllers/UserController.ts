@@ -1,14 +1,14 @@
 import express from 'express';
 import passport from 'passport';
 import { IVerifyOptions } from 'passport-local';
-import { sequelize } from '../sequelize';
-import { User } from '../models/User';
+import * as apiRoutes from '../constants/routes';
 import { Comments } from '../models/Comments';
-import { RequestValidation } from '../validators/RequestValidation';
-import { UserValidator } from '../validators/UserValidator';
+import { User } from '../models/User';
+import { sequelize } from '../sequelize';
 import AuthService from '../services/AuthService';
 import { getPasswordHash } from '../utils/userUtils';
-import * as apiRoutes from '../constants/routes';
+import { RequestValidation } from '../validators/RequestValidation';
+import { UserValidator } from '../validators/UserValidator';
 
 export class UserController {
   public router: express.Router = express.Router();
@@ -28,7 +28,7 @@ export class UserController {
 
   public getAllUsers( req: express.Request, res: express.Response ) {
     User.findAll()
-      .then( users => res.send(
+      .then( (users) => res.send(
         users.map( ( { id, login } ) => ({ id, login }) )
       ) );
   }
@@ -37,11 +37,11 @@ export class UserController {
     new RequestValidation().validate( req )
       .then( () => {
         const { login, password } = req.body;
-        getPasswordHash( password ).then( hash =>
+        getPasswordHash( password ).then( (hash) =>
           User.create( { login, password: hash } )
-        ).then( ( { id, login } ) => res.send( { user: { id, login } } ) );
+        ).then( ( { id, login: userLogin } ) => res.send( { user: { id, login: userLogin } } ) );
       } )
-      .catch( errors => res.status( 400 ).json( errors ) );
+      .catch( (errors) => res.status( 400 ).json( errors ) );
   }
 
   public logIn( req: express.Request, res: express.Response, next: express.NextFunction ) {
@@ -52,9 +52,9 @@ export class UserController {
       if (!user) {
         return res.status( 400 ).json( info );
       }
-      req.login( user, ( err ) => {
-        if (err) {
-          return next( err );
+      req.login( user, ( loginError ) => {
+        if (loginError) {
+          return next( loginError );
         }
 
         return res.status( 200 ).json( { message: 'success' } );
