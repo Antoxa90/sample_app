@@ -1,6 +1,6 @@
-#React Typescript Node App
+# React Typescript Node App
 
-##Server
+## Server
 
 1. Create docker container with mysql server
 
@@ -21,7 +21,7 @@
 
 `npm test`
 
-##Client
+## Client
 
 Run webpack dev server
 
