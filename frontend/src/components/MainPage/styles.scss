@@ -1,0 +1,11 @@
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 6px 5px rgba(27, 39, 51, 0.15);
+
+  .sign-in {
+    cursor: pointer;
+  }
+}

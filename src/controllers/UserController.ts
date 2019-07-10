@@ -20,10 +20,16 @@ export class UserController {
   }
 
   public intializeRoutes() {
+    this.router.get( apiRoutes.USER, AuthService.isAuthenticated, this.getCurrentUser );
     this.router.get( apiRoutes.USERS, AuthService.isAuthenticated, this.getAllUsers );
     this.router.post( apiRoutes.SIGN_UP, this.userValidator.signUp(), this.signUp );
     this.router.post( apiRoutes.LOGIN, this.logIn );
     this.router.get( apiRoutes.LOGOUT, this.logOut );
+  }
+
+  public getCurrentUser( req: express.Request, res: express.Response ) {
+    const { dataValues: { password, ...userData } }: User = req.user;
+    return res.status( 200 ).json( { user: userData } );
   }
 
   public getAllUsers( req: express.Request, res: express.Response ) {
@@ -57,7 +63,7 @@ export class UserController {
           return next( loginError );
         }
 
-        return res.status( 200 ).json( { message: 'success' } );
+        return res.status( 200 ).json( { message: 'success', user: { login: user.login } } );
       } );
     } )( req, res, next );
   }

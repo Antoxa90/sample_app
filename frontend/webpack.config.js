@@ -17,7 +17,15 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    disableHostCheck: true
+    disableHostCheck: true,
+    port: 8000,
+    proxy: {
+      '/api/**': {
+        target: 'http://localhost:9000',
+        secure: false,
+        changeOrigin: true,
+      }
+    },
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx']
@@ -67,10 +75,7 @@ module.exports = {
         test: /\.(svg|woff|woff2|eot|ttf|otf|csv|pdf|png)$/,
         use: [
           {
-            loader: 'file-loader',
-            options: {
-              name: 'assets/[name]-[hash:8].[ext]'
-            }
+            loader: 'url-loader?limit=100000'
           }
         ]
       }

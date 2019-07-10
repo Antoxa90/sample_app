@@ -33,6 +33,12 @@
       "check-format",
       "allow-pascal-case",
       "allow-leading-underscore"
+    ],
+    "max-line-length": false,
+    "no-unused-expression": [
+      true,
+      "allow-fast-null-checks",
+      "allow-new"
     ]
   },
   "rulesDirectory": []

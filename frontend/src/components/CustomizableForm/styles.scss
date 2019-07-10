@@ -1,0 +1,124 @@
+@import '../../utils/colors';
+
+.custom-form {
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-style: italic;
+    padding-left: 10px;
+  }
+  .form-header {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  input, select {
+    margin-bottom: 15px;
+    display: block;
+    width: 100%;
+    border: 0;
+    border-bottom: 1px solid map_get($grey-colors, '400');
+    font-size: 16px;
+    padding: 10px 10px 5px 5px;
+    color: map_get($grey-colors, '700');
+    background: map_get($base-colors, 'white');
+    outline: none;
+    &:focus {
+      border-bottom: 1px solid map_get($blue-colors, 'a700');
+      color: map_get($grey-colors, '900');
+      &::placeholder {
+        color: map_get($grey-colors, '900');
+      }
+    }
+    &::placeholder {
+      color: map_get($grey-colors, '700');
+    }
+  }
+  form {
+    div:focus-within > label {
+      color: map_get($blue-colors, 'a700');
+    }
+  }
+  input {
+    padding: 10px 15px 5px 10px;
+  }
+  .custom-checkbox {
+    input {
+      display: inline;
+      margin-right: 10px;
+    }
+  }
+  button,
+  button.button,
+  button.button:hover,
+  button.button:focus {
+    padding: 10px 40px;
+    font-size: 16px;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 0;
+    background-color: map_get($indigo-colors, '900');
+    color: map_get($base-colors, 'white');
+    cursor: pointer;
+    font-weight: bold;
+    font-family: Lato, sans-serif;
+    margin-right: 0;
+    line-height: inherit;
+    vertical-align: bottom;
+  }
+  button.button-invert {
+    background-color: map_get($base-colors, 'white');
+    color: map_get($grey-colors, '900');
+    margin-left: 20px;
+    border: 1px solid map_get($indigo-colors, '900');
+  }
+  .btn {
+    padding: 10px 40px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 0;
+    cursor: pointer;
+  }
+  .hidden {
+    display: none;
+  }
+  .submit-succeed {
+    background-color: map_get(map_get($alert-colors, 'succeed'), 'background' );
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: map_get(map_get($alert-colors, 'succeed'), 'text' );
+    border-color: map_get(map_get($alert-colors, 'succeed'), 'border' );
+    margin-bottom: 20px;
+  }
+  .submit-failed {
+    color: map_get(map_get($alert-colors, 'failed'), 'text' );
+    background-color: map_get(map_get($alert-colors, 'failed'), 'background' );
+    border-color: map_get(map_get($alert-colors, 'failed'), 'border' );
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  .search & {
+    form {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      select {
+        margin-bottom: 15px;
+      }
+    }
+    .buttons {
+      margin-top: 0;
+      button,
+      button:hover,
+      button:focus {
+        margin-top: 0;
+        padding: 10px 20px;
+      }
+    }
+  }
+  .separating-label {
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+}
