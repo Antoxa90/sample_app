@@ -1,0 +1,29 @@
+version: '3.5'
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: medicine_mysql
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    restart: unless-stopped
+    volumes:
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: medicine
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    ports:
+      - 3306:3306
+    networks:
+      medicine: {ipv4_address: 10.103.0.2}
+
+volumes:
+  db:
+    driver: local
+
+networks:
+  medicine:
+    driver: bridge
+    ipam:
+      config: [{subnet: 10.103.0.0/16}]

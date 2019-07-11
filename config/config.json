@@ -3,7 +3,7 @@
     "username": "user",
     "password": "user",
     "database": "medicine",
-    "host": "172.17.0.2",
+    "host": "10.103.0.2",
     "dialect": "mysql",
     "operatorsAliases": "{ $gt: Sequelize.Op.gt }"
   },
@@ -11,7 +11,7 @@
     "username": "user",
     "password": "user",
     "database": "medicine_test",
-    "host": "172.17.0.2",
+    "host": "10.103.0.2",
     "dialect": "mysql",
     "operatorsAliases": "{ $gt: Sequelize.Op.gt }"
   }

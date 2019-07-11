@@ -1,10 +1,12 @@
 SHELL:=/bin/bash
 
-# Docker
-create: ## Create mysql container
-	docker pull mysql/mysql-server:5.7 && docker run --name=mysql -p 3306:3306 -e "MYSQL_ROOT_PASSWORD=root" -e "MYSQL_USER=user" -e "MYSQL_PASSWORD=user" -e "MYSQL_DATABASE=medicine" -d mysql/mysql-server:5.7
-start: ## Start mysql container
-	docker container start mysql
+# Docker Compose
+up:  ## Runs the application
+	docker-compose -f docker/docker-compose.yaml up -d
+stop: ## Stops the application
+	docker-compose -f docker/docker-compose.yaml stop
+up-build: ## Runs and builds the application
+	docker-compose -f docker/docker-compose.yaml up -d --build
 
 # Database
 db-update: ## Updates db

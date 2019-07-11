@@ -4,7 +4,7 @@
 
 1. Create docker container with mysql server
 
-    `make create`
+    `make up`
     
 2. Start server
 
@@ -19,10 +19,13 @@
     
 4. Run tests (need migrations for test database)
 
-`npm test`
+    ```
+    make db-update-test
+    npm test
+    ```
 
 ## Client
 
 Run webpack dev server
 
-`npm run dev`
+`cd frontent/ && npm run dev`
