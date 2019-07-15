@@ -26,6 +26,10 @@
 
 ## Client
 
-Run webpack dev server
+Run webpack dev server and go to http://localhost:8000
 
-`cd frontent/ && npm run dev`
+    `cd frontend/ && npm run dev`
+
+Or compile frontend and go to http://localhost:9000
+
+    `cd frontend/ && npm run build`

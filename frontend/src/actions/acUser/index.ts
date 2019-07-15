@@ -13,7 +13,7 @@ const {
 } );
 
 const acGetUser = (): ThunkResult<void> => ( dispatch: Dispatch ) => {
-  Api.getUser().then( ( { user } ) => dispatch( acSetUser( user.login ) ) );
+  return Api.getUser().then( ( { user } ) => dispatch( acSetUser( user.login ) ) );
 };
 
 const acSignIn = ( login: string, password: string ): ThunkResult<Promise<any>> => ( dispatch: Dispatch ) => {

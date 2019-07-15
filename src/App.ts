@@ -2,6 +2,7 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
+import * as path from 'path';
 import AuthService from './services/AuthService';
 
 export default class App {
@@ -17,6 +18,7 @@ export default class App {
     this.initializeMiddlewares();
     this.initializeControllers( controllers );
     this.initializeApiLogger();
+    this.initializeDefaultRoutes();
   }
 
   public listen() {
@@ -32,6 +34,7 @@ export default class App {
     this.app.use( session( { secret: 'shmecret', resave: true, saveUninitialized: true } ) );
     this.app.use( passport.initialize() );
     this.app.use( passport.session() );
+    this.app.use( express.static( path.join( __dirname, '/../frontend/dist' ) ) );
   }
 
   private initializeControllers( controllers: any[] ) {
@@ -44,6 +47,12 @@ export default class App {
     this.app.use( ( req: express.Request, res: express.Response, next: express.NextFunction ) => {
       console.log( `${req.method} ${req.path}` );
       next();
+    } );
+  }
+
+  private initializeDefaultRoutes() {
+    this.app.get( '/', ( req: express.Request, res: express.Response ) => {
+      res.sendFile( './index.html' );
     } );
   }
 }

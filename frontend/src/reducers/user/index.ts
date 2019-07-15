@@ -7,11 +7,15 @@ const initialState: IUser = {
   login: '',
 };
 
-interface IPayload {
-  payload: any;
+interface IUserPayload {
+  login?: string;
 }
 
-export default handleActions<IUser> ({
+interface IPayload {
+  payload: IUserPayload;
+}
+
+export default handleActions<IUserPayload> ({
   [`${acSetUser}`]: ( state: IUser, { payload: { login } }: IPayload ) => ({
     ...state,
     isAuth: true,
