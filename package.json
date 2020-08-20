@@ -36,7 +36,7 @@
     "@types/node": "^11.13.10",
     "@types/passport": "^1.0.0",
     "@types/passport-local": "^1.0.33",
-    "bcrypt": "^3.0.6",
+    "bcrypt": "^5.0.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "mocha": "^6.1.4",
